@@ -3,15 +3,16 @@ from telegram.ext.messagehandler import MessageHandler
 import constants
 import telegram.ext as tg
 import responses as resp
+import commands_response as cr
 
 print("Bot started. ")              #signal that bot started in python commandline
 
 def start_command_handler(update, context):
-    update.message.reply_text('Place_holder_text_for_start')                       #Do change this later into other text
+    update.message.reply_text(cr.start_response)                       #Do change this later into other text
 
 
 def help_command_handler(update, context):
-    update.message.reply_text('Place_holder_text_for_help')                       #Do change this later into other text
+    update.message.reply_text(cr.help_response)                       #Do change this later into other text
 
 def msg_handle_interface(update, context):
     received_text = str(update.message.text).lower()
@@ -20,7 +21,7 @@ def msg_handle_interface(update, context):
     update.message.reply_text(response_text)
 
 def error(update, context):
-    print("update caused error ")
+    print(f"update {update} caused error {context.error}")
 
 def main(): 
     updater = tg.Updater(constants.API_KEY, use_context=True)
