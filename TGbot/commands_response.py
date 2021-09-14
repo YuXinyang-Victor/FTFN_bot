@@ -1,0 +1,2 @@
+start_response = "私はスカジ、バウンティハンターよ。あなた、本気で私を雇うつもり？私がいれば、厄災を招くかもしれないのよ。"
+help_response = "質問がある？私に関して、よくある質問がこちらです。<link_to_description> \n 私がおかしくなった？ケルシーがいないね。じゃ、Dr.North (@FromTheFarNorth)とDr.Carainy (@Carainy)を呼んでください。"
