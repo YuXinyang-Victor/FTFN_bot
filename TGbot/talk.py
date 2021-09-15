@@ -6,15 +6,16 @@ import other_response as other
 import trust_increase_messages as tim
 import new_unlocked_message_alert as numa
 
-trust1 = 40
-trust2 = 100
-trust3 = 150
-trust4 = 200
+trust1 = 400
+trust2 = 1000
+trust3 = 1500
+trust4 = 2000
 
 def should_i_respond(user_id):
     condition_talk = IO.get_talk_cnt(user_id)
     condition_harass = IO.get_harass(user_id)
     condition_others = True                     #currently hard-coded as true. This is placeholder that indicates that future addition of conditions can be done here. 
+
 
     if((condition_talk < 20) & (condition_harass != 2) & condition_others):
         return True
@@ -32,7 +33,7 @@ def other_response():
 
 def rnd_trust_incrs():
     value = randint(1, 10)
-    return (value/10)
+    return value
 
 def should_i_alert_new_unlocked_msg(curr_trust1, curr_trust2):
     trust_list = [trust1, trust2, trust3, trust4]
