@@ -9,3 +9,4 @@ TGbot/__pycache__/fileIO.cpython-39.pyc
 TGbot/__pycache__/constants.cpython-39.pyc
 
 *.pyc
+*.csv
