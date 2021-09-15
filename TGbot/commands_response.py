@@ -11,11 +11,11 @@ def talk_response(user_id):
         trust_incrs = tk.will_trust_incrs()
 
         if (trust_incrs):
-            response = tk.trust_increase()
+            response = tk.trust_increase_msg()
             add_trust = tk.rnd_trust_incrs()
-            curr_trust1 = IO.get_trust()
+            curr_trust1 = IO.get_trust(user_id)
             IO.update_trust(add_trust)
-            curr_trust2 = IO.get_trust()
+            curr_trust2 = IO.get_trust(user_id)
 
             alert = tk.should_i_alert_new_unlocked_msg(curr_trust1, curr_trust2)
 
@@ -25,7 +25,7 @@ def talk_response(user_id):
 
 
         else:
-            curr_trust = IO.get_trust()
+            curr_trust = IO.get_trust(user_id)
             response = IO.get_an_unlocked_response(user_id, curr_trust)
             
 
