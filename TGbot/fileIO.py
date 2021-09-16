@@ -32,10 +32,10 @@ def update_trust(add_trust, user_id):                                    #need t
         lock.release()
         return
 
-def get_harass(user_id):                                        #need to write
+def get_touch(user_id):                                        #need to write
     user_profile = pd.read_csv('user_profile.csv', index_col = 0)
-    harass = user_profile['harass'][user_id]
-    return harass     #debug hard code
+    touch = user_profile['touch'][user_id]
+    return touch     #debug hard code
 
 def get_talk_cnt(user_id):                                      #need to write
     user_profile = pd.read_csv('user_profile.csv', index_col = 0)
@@ -69,7 +69,17 @@ def update_talk(user_id):
         lock.acquire()
         user_profile = pd.read_csv('user_profile.csv', index_col = 0)
         user_profile.loc[user_profile.index == user_id, 'talk_cnt'] += 1
-        user_talk_cnt = user_profile.loc[user_profile.index == user_id, 'talk_cnt']
+
+        user_profile.to_csv("user_profile.csv")
+        lock.release()
+        return
+
+def update_touch(user_id, touch):
+    for i in range(10000):
+        lock.acquire()
+        user_profile = pd.read_csv('user_profile.csv', index_col = 0)
+        user_profile.loc[user_profile.index == user_id, 'touch'] = touch
+
         user_profile.to_csv("user_profile.csv")
         lock.release()
         return
