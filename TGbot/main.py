@@ -19,6 +19,11 @@ def talk_command_handler(update, context):
     talk_response = cr.talk_response(user_id)
     update.message.reply_text(talk_response)
 
+def touch_command_handler(update, context):
+    user_id = update.message.from_user.id
+    touch_response = cr.touch_response(user_id)
+    update.message.reply_text(touch_response) 
+
 def msg_handle_interface(update, context):
     received_text = str(update.message.text).lower()
     response_text = resp.respond(received_text)
@@ -35,6 +40,7 @@ def main():
     dp.add_handler(CommandHandler("start", start_command_handler))
     dp.add_handler(CommandHandler("help", help_command_handler))
     dp.add_handler(CommandHandler("talk", talk_command_handler))
+    dp.add_handler(CommandHandler("touch", touch_command_handler))
 
     dp.add_handler(MessageHandler(tg.Filters.text, msg_handle_interface))
 
