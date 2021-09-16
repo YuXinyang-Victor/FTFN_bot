@@ -1,6 +1,3 @@
-from TGbot.talk import touch_failed_msg, trust_decrease_msg
-
-
 trust_increase_message = ["(trust_increase_message_placeholder1)", 
                           "(trust_increase_message_placeholder2)", 
                           "(trust_increase_message_placeholder3)"]
