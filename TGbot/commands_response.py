@@ -2,6 +2,7 @@ import fileIO as IO
 from random import randint
 import talk as tk
 import threading
+import constants as cons
 
 start_response = "私はスカジ、バウンティハンターよ。あなた、本気で私を雇うつもり？私がいれば、厄災を招くかもしれないのよ。"
 help_response = "質問がある？私に関して、よくある質問がこちらです。<link_to_description> \n 私がおかしくなった？ケルシーがいないね。じゃ、Dr.North (@FromTheFarNorth)とDr.Carainy (@Carainy)を呼んでください。"
@@ -49,3 +50,67 @@ def talk_response(user_id):
         response = tk.other_response()
 
     return response
+
+def touch_response(user_id):
+    #IO.check_and_create_user_profile(user_id)
+    thread_check_create = threading.Thread(target = IO.check_and_create_user_profile, args=(user_id,))                #All changes to the csv file are critical and should follow the multithreading procedure
+    thread_check_create.start()
+    thread_check_create.join()
+
+    curr_touch = IO.get_touch(user_id)
+    if (curr_touch != -1):
+        response = tk.other_response()
+        return response
+
+    else: 
+        curr_trust = IO.get_trust(user_id)
+
+        prob_trust_increase = cons.probability_of_trust_increase(curr_trust)
+        prob_trust_decrease = cons.probability_of_trust_decrease(prob_trust_increase)
+        prob_trust_unchanged = cons.probability_of_trust_unchanged()
+
+        value = randint(0,10) / 10
+
+        if (value <= prob_trust_increase):
+
+            IO.update_touch(user_id, 1)
+
+            response = tk.trust_increase_by_touch_msg()
+            add_trust = tk.rnd_trust_incrs_by_touch()
+            curr_trust1 = IO.get_trust(user_id)
+
+            #IO.update_trust(add_trust, user_id)
+            thread_update_trust = threading.Thread(target = IO.update_trust, args = (add_trust,user_id,))
+            thread_update_trust.start()
+            thread_update_trust.join()
+
+            curr_trust2 = IO.get_trust(user_id)
+
+            alert = tk.should_i_alert_new_unlocked_msg(curr_trust1, curr_trust2)
+
+            if(alert):
+                response = tk.new_unlocked_msg_alert()
+
+        elif (value <= (prob_trust_decrease + prob_trust_increase)):
+
+            IO.update_touch(user_id, 2)
+
+            response = tk.trust_decrease_msg()
+            decrease_trust = tk.rnd_trust_decrs_by_touch()
+            decrease_trust = - decrease_trust
+
+            thread_update_trust = threading.Thread(target = IO.update_trust, args = (decrease_trust,user_id,))
+            thread_update_trust.start()
+            thread_update_trust.join()
+
+        else:
+
+            IO.update_touch(user_id, 0)
+
+            response = tk.touch_failed_msg()
+        
+        return response
+
+
+
+
