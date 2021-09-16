@@ -24,6 +24,11 @@ def touch_command_handler(update, context):
     touch_response = cr.touch_response(user_id)
     update.message.reply_text(touch_response) 
 
+def check_trust_command_handler(update, context):
+    user_id = update.message.from_user.id
+    check_trust_response = cr.check_trust_response(user_id)
+    update.message.reply_text(check_trust_response)
+
 def msg_handle_interface(update, context):
     received_text = str(update.message.text).lower()
     response_text = resp.respond(received_text)
@@ -41,6 +46,7 @@ def main():
     dp.add_handler(CommandHandler("help", help_command_handler))
     dp.add_handler(CommandHandler("talk", talk_command_handler))
     dp.add_handler(CommandHandler("touch", touch_command_handler))
+    dp.add_handler(CommandHandler("check_trust", check_trust_command_handler))
 
     dp.add_handler(MessageHandler(tg.Filters.text, msg_handle_interface))
 
