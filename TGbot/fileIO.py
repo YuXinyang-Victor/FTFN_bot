@@ -46,18 +46,23 @@ def get_talk_cnt(user_id):                                      #need to write
 def check_and_create_user_profile(user_id):                     #need to write lock
     for i in range(10000):
         lock.acquire()
-        user_profile = pd.read_csv('user_profile.csv', index_col = 0)
+        user_profile = pd.read_csv('user_profile.csv', index_col=0)
+
         list_of_existing_users = user_profile.index.to_list()
+
         if (user_id in list_of_existing_users):
+            
             lock.release()
             return
         else:
-            new_profile = [user_id, cons.trust_init, cons.talk_cnt_init, cons.harass_init]
-            user_profile.loc[len(user_profile)] = new_profile
+            new_profile = [cons.trust_init, cons.talk_cnt_init, cons.touch_init]
+            new_profile_series = pd.Series(new_profile, index = user_profile.columns)
+            new_profile_series.name = user_id
+            
+            user_profile = user_profile.append(new_profile_series)
 
-            for i in range(10000):
                 
-                user_profile.to_csv("user_profile.csv")
+            user_profile.to_csv("user_profile.csv")
                 
         
             print("new user created! " + str(user_id))
