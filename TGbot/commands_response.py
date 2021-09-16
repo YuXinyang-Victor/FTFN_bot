@@ -111,6 +111,18 @@ def touch_response(user_id):
         
         return response
 
+def check_trust_response(user_id):
+    #IO.check_and_create_user_profile(user_id)
+    thread_check_create = threading.Thread(target = IO.check_and_create_user_profile, args=(user_id,))                #All changes to the csv file are critical and should follow the multithreading procedure
+    thread_check_create.start()
+    thread_check_create.join()
+
+    curr_trust = IO.get_trust(user_id)
+
+    response = "my current trust for you is " + str(curr_trust)
+
+    return response
+
 
 
 
