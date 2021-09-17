@@ -23,8 +23,8 @@ def should_i_respond(user_id):
         return False
 
 def will_trust_incrs():
-    value = randint(1, 20)
-    return (value // 20)
+    value = randint(1, 10)
+    return (value // 10)
 
 def other_response():
     value = randint(0, len(other.other_response)-1)
