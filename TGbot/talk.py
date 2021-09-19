@@ -1,6 +1,7 @@
 from random import randint
+from random import uniform
 import fileIO as IO
-from random import randint
+import math
 
 import other_response as other
 import trust_messages as tim
@@ -22,9 +23,20 @@ def should_i_respond(user_id):
     else:
         return False
 
-def will_trust_incrs():
-    value = randint(1, 10)
-    return (value // 10)
+def will_trust_incrs(user_id):
+    switch = IO.get_talk_incrs(user_id)
+    if (switch):
+        value = randint(1, 10)
+        return (value // 10)
+    else:
+        value = IO.get_talk_cnt(user_id)
+        prob_based_on_talk_cnt = 1 - math.cos(math.pi*value/40)
+    
+        value2 = uniform(0, 1)
+        if(value2 <= prob_based_on_talk_cnt):
+            return True
+        else:
+            return False
 
 def other_response():
     value = randint(0, len(other.other_response)-1)

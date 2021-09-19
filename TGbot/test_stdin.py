@@ -1,1 +1,3 @@
-print("hello0")
+import sys
+path = sys.path
+print(path)

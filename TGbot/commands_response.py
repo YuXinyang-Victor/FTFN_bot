@@ -18,10 +18,11 @@ def talk_response(user_id):
     if(hanndann):
         IO.update_talk(user_id)
 
-        trust_incrs = tk.will_trust_incrs()
+        trust_incrs = tk.will_trust_incrs(user_id)
 
 
         if (trust_incrs):
+            IO.update_talk_incrs(user_id)
             response = tk.trust_increase_msg()
             add_trust = tk.rnd_trust_incrs()
             curr_trust1 = IO.get_trust(user_id)

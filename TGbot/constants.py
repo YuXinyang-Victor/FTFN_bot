@@ -5,6 +5,7 @@ API_KEY = '1965742244:AAGNlPICQUErHXqRspSwrmupEITZF5rfnRo'
 trust_init = 0
 touch_init = -1
 talk_cnt_init = 0
+talk_incrs_init = 0
 
 prob_trust_change_by_touch = 0.55
 
