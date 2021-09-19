@@ -4,6 +4,9 @@ import constants
 import telegram.ext as tg
 import responses as resp
 import commands_response as cr
+import fileIO as IO
+import time
+import schedule
 
 print("Bot started. ")              #signal that bot started in python commandline
 
@@ -54,5 +57,11 @@ def main():
 
     updater.start_polling()
     updater.idle()
+
+    schedule.every().day.at("04:00").do(IO.reset_everyday)
+
+    while True:
+        schedule.run_pending()
+        time.sleep(0.01)
 
 main()
