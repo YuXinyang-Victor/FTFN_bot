@@ -1,0 +1,13 @@
+TGbot/__pycache__/commands_response.cpython-39.pyc
+TGbot/__pycache__/talk.cpython-39.pyc
+TGbot/__pycache__/responses.cpython-39.pyc
+TGbot/__pycache__/other_response.cpython-39.pyc
+TGbot/__pycache__/msg_type_talktome.cpython-39.pyc
+TGbot/__pycache__/msg_type_greetings.cpython-39.pyc
+TGbot/__pycache__/list_of_types.cpython-39.pyc
+TGbot/__pycache__/fileIO.cpython-39.pyc
+TGbot/__pycache__/constants.cpython-39.pyc
+
+*.pyc
+*.csv
+*.json
