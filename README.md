@@ -1,2 +1,2 @@
 # FTFN_bot
-A telegram bot in its early stages of development
+bot 1.0 features updated on 19/09/2021
