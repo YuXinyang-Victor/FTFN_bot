@@ -43,6 +43,12 @@ def get_talk_cnt(user_id):                                      #need to write
     talk_cnt = user_profile['talk_cnt'][user_id]
     return talk_cnt     #debug hard code
 
+def get_talk_incrs(user_id):
+    user_profile = pd.read_csv('user_profile.csv', index_col = 0)
+
+    talk_incrs = user_profile['talk_incrs'][user_id]
+    return talk_incrs
+
 def check_and_create_user_profile(user_id):                     #need to write lock
     for i in range(10000):
         lock.acquire()
@@ -55,7 +61,7 @@ def check_and_create_user_profile(user_id):                     #need to write l
             lock.release()
             return
         else:
-            new_profile = [cons.trust_init, cons.talk_cnt_init, cons.touch_init]
+            new_profile = [cons.trust_init, cons.talk_cnt_init, cons.touch_init, cons.talk_incrs_init]
             new_profile_series = pd.Series(new_profile, index = user_profile.columns)
             new_profile_series.name = user_id
             
@@ -84,6 +90,28 @@ def update_touch(user_id, touch):
         lock.acquire()
         user_profile = pd.read_csv('user_profile.csv', index_col = 0)
         user_profile.loc[user_profile.index == user_id, 'touch'] = touch
+
+        user_profile.to_csv("user_profile.csv")
+        lock.release()
+        return
+
+def update_talk_incrs(user_id):
+    for i in range(10000):
+        lock.acquire()
+        user_profile = pd.read_csv('user_profile.csv', index_col = 0)
+        user_profile.loc[user_profile.index == user_id, 'talk_incrs'] = 1
+
+        user_profile.to_csv("user_profile.csv")
+        lock.release()
+        return
+
+def reset_everyday():
+    for i in range(10000):
+        lock.acquire()
+        user_profile = pd.read_csv('user_profile.csv', index_col = 0)
+        user_profile['touch'] = -1
+        user_profile['talk'] = 0
+        user_profile['talk_incrs'] = 0
 
         user_profile.to_csv("user_profile.csv")
         lock.release()
