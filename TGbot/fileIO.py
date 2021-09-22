@@ -110,7 +110,7 @@ def reset_everyday():
         lock.acquire()
         user_profile = pd.read_csv('user_profile.csv', index_col = 0)
         user_profile['touch'] = -1
-        user_profile['talk'] = 0
+        user_profile['talk_cnt'] = 0
         user_profile['talk_incrs'] = 0
 
         user_profile.to_csv("user_profile.csv")
