@@ -1,16 +1,14 @@
 from random import randint
 from random import uniform
 import fileIO as IO
+import constants as cons
 import math
 
 import other_response as other
 import trust_messages as tim
 import new_unlocked_message_alert as numa
+import talk_response as tr
 
-trust1 = 400
-trust2 = 1000
-trust3 = 1500
-trust4 = 2000
 
 def should_i_respond(user_id):
     condition_talk = IO.get_talk_cnt(user_id)
@@ -38,6 +36,18 @@ def will_trust_incrs(user_id):
         else:
             return False
 
+def get_an_unlocked_response(curr_trust):              #need to write
+    trust_list = cons.trust_threshold_for_msg
+
+    for i in trust_list:
+        if i > curr_trust:
+            break
+    additional_msg_cnt = trust_list.index(i) - 1
+
+    value = randint(0, 2 + additional_msg_cnt)
+    unlocked_response = tr.talk_response[value]
+    return unlocked_response #return strings, do the randint() HERE!
+
 def other_response():
     value = randint(0, len(other.other_response)-1)
     response = other.other_response[value]
@@ -56,7 +66,7 @@ def rnd_trust_decrs_by_touch():
     return value
 
 def should_i_alert_new_unlocked_msg(curr_trust1, curr_trust2):
-    trust_list = [trust1, trust2, trust3, trust4]
+    trust_list = cons.trust_threshold_for_msg
 
     for i in trust_list:
         if ((curr_trust1 < i) &(curr_trust2 >= i)):

@@ -43,7 +43,7 @@ def talk_response(user_id):
 
         else:
             curr_trust = IO.get_trust(user_id)
-            response = IO.get_an_unlocked_response(user_id, curr_trust)
+            response = tk.get_an_unlocked_response(curr_trust)
             
 
 

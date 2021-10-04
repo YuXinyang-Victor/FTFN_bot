@@ -20,3 +20,5 @@ def probability_of_trust_decrease(prob_trust_increase):
 def probability_of_trust_unchanged():
     prob_trust_unchanged = 1 - prob_trust_change_by_touch
     return prob_trust_unchanged
+
+trust_threshold_for_msg = [0, 100, 400, 800, 1400, 2000]
