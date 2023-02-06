@@ -36,6 +36,17 @@ def reply_check_trust(message):
 	check_trust_response = cr.check_trust_response(user_id)
 	bot.send_message(message.chat.id, check_trust_response)
 
+@bot.message_handler(commands=['assist_me'])
+def reply_assist(message):
+	#Assist you in checking
+	assist_response = cr.assist_me_in_JP_VISA_2()
+	bot.send_message(message.chat.id, assist_response)
+	alert = cr.assist_infinite_polling_2()
+	bot.send_message(message.chat.id, alert)
+	
+	
+
+
 @bot.message_handler(func=lambda message: True)
 def reply_text_msg(message):
 	received_text = str(message.text).lower()

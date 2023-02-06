@@ -1,8 +1,10 @@
 import fileIO as IO
+import time
 from random import randint
 import talk as tk
 import threading
 import constants as cons
+import assist_functions as af
 
 start_response = "私はスカジ、バウンティハンターよ。あなた、本気で私を雇うつもり？私がいれば、厄災を招くかもしれないのよ。"
 help_response = "質問がある？私に関して、よくある質問がこちらです。<link_to_description> \n 私がおかしくなった？ケルシーがいないね。じゃ、Dr.North (@FromTheFarNorth)とDr.Carainy (@Carainy)を呼んでください。"
@@ -43,7 +45,7 @@ def talk_response(user_id):
 
         else:
             curr_trust = IO.get_trust(user_id)
-            response = IO.get_an_unlocked_response(user_id, curr_trust)
+            response = tk.get_an_unlocked_response(curr_trust)
             
 
 
@@ -124,6 +126,43 @@ def check_trust_response(user_id):
 
     return response
 
+def assist_me_in_JP_VISA():
+    #She helps me check Japan VISA application appointment system
+    count = af.check_number_accepting()
+    if(count!=8):
+        response = "ドクター、今ACCEPTINGの数は"+str(count)+"です。変更したから、確認してみようか: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+    else:
+        response = "ドクター、今ACCEPTINGの数は"+str(count)+"です。確認したいなら: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+    return response
 
+def assist_me_in_JP_VISA_2():
+    ##Update checking function after Feb 2 update
+    changed = af.check_accepting_script()
+    if(changed):
+        response = "ドクター、予約状況が変更したから、確認してみようか: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+    else:
+        response = "ドクター、今は満席です。確認したいなら: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+    return response
+
+def assist_infinite_polling():
+    i = 0
+    while (i == 0):
+        print("assist polling ...")
+        count = af.check_number_accepting()
+        if (count != 8):
+            response = "ドクター、今ACCEPTINGの数は"+str(count)+"です。変更を気付いたから、確認してみようか: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+            return response
+        time.sleep(60)
+
+def assist_infinite_polling_2():
+    #Update checking function after Feb 2 update
+    i = 0
+    while (i == 0):
+        print("assist polling ...")
+        changed = af.check_accepting_script()
+        if (changed):
+            response = "ドクター、予約状況の変更を気付いたから、確認してみようか: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
+            return response
+        time.sleep(60)
 
 
