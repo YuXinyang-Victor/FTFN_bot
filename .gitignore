@@ -12,3 +12,5 @@ TGbot/__pycache__/constants.cpython-39.pyc
 *.csv
 *.json
 *.log
+Pipfile
+Pipfile.lock
