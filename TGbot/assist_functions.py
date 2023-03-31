@@ -1,5 +1,6 @@
 URL = "https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
 KEY1 = "\"name\":\"Visa (Sightseeing)\",\"paymentMethods\":{\"onlinePaymentEnabled\":false,\"onsitePaymentEnabled\":false,\"payableWithPrepayment\":false,\"payableWithSubscription\":false,\"payableWithTicket\":false},\"lowestPrice\":null,\"publicId\":\"948169\",\"primaryImage\":null,\"scheme\":\"EVENT_SCHEME\",\"status\":\"fully_booked\",\"tagNames\":[],\"vacancyVisibility\":\"hidden\",\"waitingListProvided\":false,\"thumbnailUrl\":\"\""
+KEY3 = "\"name\":\"Visa (Sightseeing)\",\"paymentMethods\":{\"onlinePaymentEnabled\":false,\"onsitePaymentEnabled\":false,\"payableWithPrepayment\":false,\"payableWithSubscription\":false,\"payableWithTicket\":false},\"lowestPrice\":null,\"publicId\":\"948169\",\"primaryImage\":null,\"scheme\":\"EVENT_SCHEME\",\"status\":\"closed\",\"tagNames\":[],\"vacancyVisibility\":\"hidden\",\"waitingListProvided\":false,\"thumbnailUrl\":\"\""
 KEY2 = "\"name\":\"VISA (Sightseeing)\",\"paymentMethods\":{\"onlinePaymentEnabled\":false,\"onsitePaymentEnabled\":false,\"payableWithPrepayment\":false,\"payableWithSubscription\":false,\"payableWithTicket\":false},\"lowestPrice\":null,\"publicId\":\"914977\",\"primaryImage\":null,\"scheme\":\"EVENT_SCHEME\",\"status\":\"fully_booked\",\"tagNames\":[],\"vacancyVisibility\":\"hidden\",\"waitingListProvided\":false,\"thumbnailUrl\":\"\""
 KEY = "<span class=\"Tag_Tag__MEuQu MerchantTag_MerchantTag__gr0Qn MerchantTag_isAccepting__Hr8x5\">Accepting</span>"
 CLASS = ['Tag_Tag__MEuQu', 'MerchantTag_MerchantTag__gr0Qn', 'MerchantTag_isAccepting__Hr8x5']
@@ -43,9 +44,11 @@ def check_accepting_script():
 
     #Search for number of accepting:
     str_soup = str(soup)
-    #print(str_soup)
+    print(str_soup)
+    print(KEY1 in str_soup)
+    print(KEY2 in str_soup)
 
-    if KEY1 in str_soup and KEY2 in str_soup:
+    if (KEY1 in str_soup or KEY3 in str_soup) and KEY2 in str_soup:
         return False
     else:
         return True
