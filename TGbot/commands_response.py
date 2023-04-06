@@ -163,6 +163,6 @@ def assist_infinite_polling_2():
         if (changed):
             response = "ドクター、予約状況の変更を気付いたから、確認してみようか: https://coubic.com/Embassy-of-Japan/booking_pages#pageContent"
             return response
-        time.sleep(15)
+        time.sleep(1)
 
 
